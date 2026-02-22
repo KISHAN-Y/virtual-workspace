@@ -15,7 +15,7 @@ const resolvedHost = (hostname.includes('::') || hostname === '' || hostname ===
 
 const WS_URL = isLocal
     ? `ws://${resolvedHost}:8000/ws`
-    : 'wss://meta-space-backend.onrender.com/ws';
+    : 'wss://virtual-workspace.onrender.com/ws';
 
 // --- GLOBALS ---
 let scene, camera, renderer, controls;
