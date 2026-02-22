@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaSpace | Virtual Workspace</title>
+    <!-- Modern Typography: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Three.js (Import map for ES modules) -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body data-theme="dark">
+
+    <!-- 3D Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- UI Overlay -->
+    <div id="ui-layer">
+        
+        <!-- Top Bar -->
+        <header class="top-nav glass-panel slide-down">
+            <h1 class="logo">Meta<span class="accent">Space</span></h1>
+            <div class="user-info">
+                <div class="status-indicator online"></div>
+                <span id="username-display">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Connection Overlay -->
+        <div id="connection-overlay" class="overlay-modal fade-in">
+            <div class="modal-content glass-panel glow">
+                <h2>Welcome to MetaSpace</h2>
+                <p>Establishing spatial link...</p>
+                <div class="loader"></div>
+            </div>
+        </div>
+
+        <!-- Chat Panel -->
+        <aside class="chat-panel glass-panel slide-right" id="chat-panel">
+            <div class="chat-header">
+                <h3>Workspace Chat</h3>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will appear here -->
+            </div>
+            <div class="chat-input-wrapper">
+                <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+                <button id="send-btn" class="glow-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Controls Hint -->
+        <div class="controls-hint glass-panel slide-up">
+            <p><strong>WASD</strong> or <strong>Arrows</strong> to move. <strong>Mouse</strong> to orbit view.</p>
+        </div>
+
+    </div>
+
+    <!-- App Logic -->
+    <script type="module" src="app.js"></script>
+
+</body>
+</html>
