@@ -130,8 +130,8 @@ body::before {
     position: absolute;
     bottom: 24px;
     right: 24px;
-    width: 320px;
-    height: 400px;
+    width: 340px;
+    height: 440px;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
@@ -195,11 +195,132 @@ body::before {
     display: block;
 }
 
+/* ===== File Message Styles ===== */
+.chat-message.file-msg {
+    padding: 8px;
+}
+
+.file-preview {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.file-preview img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.file-preview img:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+.file-download-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    margin-top: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: var(--accent-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    transition: var(--transition-fast);
+}
+
+.file-download-link:hover {
+    background: rgba(0, 240, 255, 0.08);
+    border-color: rgba(0, 240, 255, 0.25);
+}
+
+.file-download-link svg {
+    flex-shrink: 0;
+}
+
+.file-download-link .file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+}
+
+.file-download-link .file-badge {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--accent-secondary);
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* Chat Input Area */
 .chat-input-wrapper {
-    padding: 16px;
+    padding: 12px 16px;
     border-top: 1px solid var(--panel-border);
     display: flex;
-    gap: 12px;
+    align-items: center;
+    gap: 8px;
+}
+
+.hidden-file-input {
+    display: none;
+}
+
+.icon-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.icon-btn:hover {
+    border-color: var(--accent-secondary);
+    color: var(--accent-secondary);
+    background: rgba(0, 240, 255, 0.06);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.1);
+}
+
+.icon-btn:active {
+    transform: scale(0.94);
+}
+
+.icon-btn-small {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.icon-btn-small:hover {
+    border-color: var(--accent-secondary);
+    color: var(--accent-secondary);
+    background: rgba(0, 240, 255, 0.06);
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.2);
 }
 
 #chat-input {
@@ -207,12 +328,13 @@ body::before {
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid var(--panel-border);
     border-radius: 8px;
-    padding: 10px 16px;
+    padding: 10px 14px;
     color: white;
     font-family: inherit;
     font-size: 14px;
     outline: none;
     transition: var(--transition-fast);
+    min-width: 0;
 }
 
 #chat-input:focus {
@@ -223,8 +345,9 @@ body::before {
 .glow-btn {
     background: var(--accent-primary);
     border: none;
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
     border-radius: 8px;
     color: white;
     display: flex;
@@ -243,6 +366,56 @@ body::before {
 
 .glow-btn:active {
     transform: translateY(0);
+}
+
+.glow-btn.full-width {
+    width: 100%;
+    margin-top: 24px;
+}
+
+/* Upload Progress Bar */
+.upload-progress {
+    padding: 0 16px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-progress.hidden {
+    display: none;
+}
+
+.upload-progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.upload-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+    border-radius: 4px;
+    animation: progressPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes progressPulse {
+    0% { width: 10%; left: 0; }
+    50% { width: 50%; left: 25%; }
+    100% { width: 10%; left: 90%; }
+}
+
+.upload-progress-text {
+    font-size: 11px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
 }
 
 /* Controls Hint */
@@ -305,6 +478,121 @@ body::before {
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: 0 auto;
+}
+
+/* Profile Modal Specifics */
+.profile-content {
+    max-width: 450px;
+    width: 90%;
+    text-align: left;
+    padding: 32px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--panel-border);
+    padding-bottom: 16px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.styled-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+.styled-input:focus {
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
+}
+
+.radio-group {
+    display: flex;
+    gap: 12px;
+}
+
+.radio-card {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    color: var(--text-secondary);
+}
+
+.radio-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.radio-card.active {
+    border-color: var(--accent-secondary);
+    background: rgba(0, 240, 255, 0.05);
+    color: var(--text-primary);
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.15);
+}
+
+.radio-card svg {
+    margin-bottom: 4px;
+}
+
+.color-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.color-swatch {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition-fast);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.color-swatch:hover {
+    transform: scale(1.1);
+}
+
+.color-swatch.active {
+    transform: scale(1.1);
+    border-color: white;
+    box-shadow: 0 0 12px currentColor;
 }
 
 /* Animations */
@@ -390,4 +678,16 @@ body::before {
     to {
         opacity: 1;
     }
+}
+
+/* System message styling */
+.chat-message.sys {
+    align-self: center;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-style: italic;
+    text-align: center;
+    padding: 6px 10px;
 }
